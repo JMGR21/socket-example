@@ -1,13 +1,16 @@
-import { createServer } from "http";
-import { Server } from "socket.io";
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const port = process.env.PORT || 3030;
 
-const httpServer = createServer();
-const io = new Server(httpServer, {
-  // options
+app.get('/', (req, res) => {
+  res.send('connection opened');
 });
 
-io.on("connection", (socket) => {
-  console.log('new connection');
+io.on('connection', (socket) => {
+  console.log('new client', sock);
 });
 
-httpServer.listen(3000);
+http.listen(port, () => {
+  console.log(`Socket.IO server running at http://casamagoswiss.ddns.net:${port}/`);
+});
