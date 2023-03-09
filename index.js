@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('new client connected');
+  console.log('new client connected', $socket);
 });
 
 http.listen(port, () => {
