@@ -1,16 +1,9 @@
-const app = require('express')();
-const http = require('http').Server(3030);
-const io = require('socket.io')(http);
-const port = process.env.PORT || 3030;
+const { Server } = require("socket.io");
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+const io = new Server({ /* options */ });
+
+io.on("connection", (socket) => {
+  console.log('connected');
 });
 
-io.on('connection', (socket) => {
-  console.log('new client', socket);
-});
-
-http.listen(port, () => {
-  console.log(`Socket.IO server running at http://casamagoswiss.ddns.net:${port}/`);
-});
+io.listen(3030);
