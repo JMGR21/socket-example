@@ -1,9 +1,11 @@
+const { createServer } = require("http");
 const { Server } = require("socket.io");
 
-const io = new Server({ /* options */ });
+const httpServer = createServer();
+const io = new Server(httpServer, { /* options */ });
 
 io.on("connection", (socket) => {
-  console.log('connected');
+  // ...
 });
 
-io.listen(3030);
+httpServer.listen(3000);
